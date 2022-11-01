@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  nginx:
+    image: nginx
+    volumes:
+     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+     - ./nginx/default.conf:/etc/nginx/conf.b/default.conf
+    ports:
+     - "8080:80"
+    environment:
+     - NGINX_PORT=80
+
+  nginxinc:
+    image: nginxinc/nginx-unprivileged
+    volumes:
+     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+     - "8080:80"
+    environment:
+     - NGINX_PORT=80
+
+# docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
